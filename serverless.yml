@@ -9,19 +9,35 @@ plugins:
   - serverless-offline
 
 functions:
-  createItem:
-    handler: handler.createItem
+  create:
+    handler: handler.create
     events:
       - http:
-          path: item
+          path: items
           method: post
-          cors: true\
-
-  deleteItem:
-    handler: handler.deleteItem
+          cors: true
+          
+  getOne:
+    handler: handler.getOne
     events:
       - http:
-          path: item/{id}
+          path: items/{id}
+          method: get
+          cors: true
+
+  getAll:
+    handler: handler.getAll
+    events:
+     - http:
+         path: items
+         method: get
+         cors: true
+
+  delete:
+    handler: handler.delete
+    events:
+      - http:
+          path: items/{id}
           method: delete
           cors: true
 
