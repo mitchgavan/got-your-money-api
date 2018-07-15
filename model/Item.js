@@ -1,11 +1,6 @@
 const mongoose = require('mongoose')
 
 const model = mongoose.model('Item', {
-  id: {
-    type: String,
-    required: true,
-    unique: true,
-  },
   title: {
     type: String,
     required: true,

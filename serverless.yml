@@ -15,6 +15,14 @@ functions:
       - http:
           path: item
           method: post
+          cors: true\
+
+  deleteItem:
+    handler: handler.deleteItem
+    events:
+      - http:
+          path: item/{id}
+          method: delete
           cors: true
 
 #    The following are a few example events you can configure

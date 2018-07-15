@@ -18,3 +18,24 @@ module.exports.createItem = (event, context, callback) => {
       }))
   })
 }
+
+module.exports.deleteItem = (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false
+
+  connectToDatabase()
+    .then(() => {
+      Item.findByIdAndRemove(event.pathParameters.id)
+        .then(item => callback(null, {
+          statusCode: 200,
+          body: JSON.stringify({
+            message: 'Removed item with id: ' + item.id,
+            item: item
+          })
+        }))
+        .catch(err => callback(null, {
+          statusCode: err.statusCode || 500,
+          headers: { 'Content-Type': 'text/plain' },
+          body: 'Could not fetch the items.'
+        }))
+    })
+}
